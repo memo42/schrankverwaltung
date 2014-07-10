@@ -26,9 +26,9 @@ class Kasten(models.Model):
 		return u'%s %s' % (self.typ, self.voll)
 
 class Schrank(models.Model):
-	nummer = models.IntegerField('SchrankNummer', default=0)
+	nummer = models.CharField('eineindeutige SchrankNummer. Format E306.1', max_length=6, default=0, primary_key=True)
 	raum = models.CharField('Raum wo Schrank steht', max_length=6)
 	kaesten = models.ForeignKey(Kasten)
 
 	def __unicode__(self): 
-		return u'%s %s' % (self.raum, self.nummer)
+		return u'%s' % (self.nummer)
