@@ -9,12 +9,17 @@ from main.models import Kasten
 from main.models import Schrank
 
 def schrank(request, schranknummer):
+	typen = Typ.objects.all()
 	schrank = Kasten.objects.filter(schrank=schranknummer)
+	kaesten = [42]
+	kaesten.pop()
+	for i in typen:
+		kaesten.append(Kasten.objects.filter(schrank=schranknummer).filter(typ=i))
 	#for name in typ:
 	#	typen = schrank.filter(schrank__typ=name)		
 	
 	template = loader.get_template('main/index.html')
-	context = RequestContext(request, {'schrank': schrank, })
+	context = RequestContext(request, {'schrank': schrank, 'kaesten': kaesten, 'typen': typen, })
 	return HttpResponse(template.render(context))
 	#return render(request, 'main/new.html')
 	#return HttpResponse("%s" % schrank)

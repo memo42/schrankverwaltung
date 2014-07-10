@@ -17,17 +17,17 @@
                      </tr>
                   </thead>
                   <tbody>
-							{% for kasten in schrank %}
+							{% for typ in typen %}
                      <tr>
 								<td>
-									{{ kasten.typ }}
+									{{ typ }}								
                         </td>
                         <td>
-									<!--{{ comment }}
-									{% for e in schrank %}
-    									{{e.typ}}
-									{% endfor %}-->
-									{{ schrank|length }}
+									{% for kasten in kaesten %}
+										{% if kasten.0.typ = typ%}
+											{{ kasten|length }}
+										{% endif %}
+									{% endfor %}
 								</td>
                      </tr>
 							{% endfor %}
