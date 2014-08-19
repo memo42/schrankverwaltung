@@ -8,11 +8,13 @@ from main.models import Typ
 from main.models import Kasten
 from main.models import Schrank
 
+from main.forms import NameForm
+
 def schrank(request, schranknummer):
 	if request.method == 'POST':
-		form = NameForm(reqest.POST)
+		form = NameForm(request.POST)
 		if form.is_valid():
-			return HttpResponseRedirect('/thank')
+			return HttpRespons("thanks")
 	else:
 		typen = Typ.objects.all()
 		schrank = Kasten.objects.filter(schrank=schranknummer)
@@ -29,4 +31,21 @@ def schrank(request, schranknummer):
 		#return render(request, 'main/new.html')
 		#return HttpResponse("%s" % schrank)
 def uebersicht(request):
-	return HttpResponse("Uebersicht") 
+	return HttpResponse("Uebersicht")
+def get_name(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = NameForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponse('thanks')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = NameForm()
+
+    return render(request, 'main/name.html', {'form': form})

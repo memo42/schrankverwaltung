@@ -7,4 +7,6 @@ urlpatterns = patterns('',
 	url(r'^$', views.uebersicht, name='uebersicht'),
 	# example: /main/e306.1/
 	url(r'^(?P<schranknummer>E\d+.\d)/$', views.schrank, name='Schrankuebersicht'),
+	# example: /name/
+	url(r'^name/$', views.get_name),
 )
