@@ -5,7 +5,9 @@ class Typ(models.Model):
 		('MA', 'Mate'),
 		('MC', 'Mate-Cola'),
 		('MG', 'Mate-Granat'),
-		('SO', 'sonstiges'),
+		('BI', 'Bier'),
+		('SO', 'Sonstiges'),
+		('LG', 'Leergut'),
 	)
 	name = models.CharField('Inhalt des Kastens', 
 									max_length=2,
@@ -19,7 +21,7 @@ class Typ(models.Model):
 
 class Schrank(models.Model):
 	nummer = models.CharField('eineindeutige SchrankNummer. Format E306.1', max_length=6, default=0, primary_key=True)
-	raum = models.CharField('Raum wo Schrank steht', max_length=6)
+	raum = models.CharField('Raum in dem der  Schrank steht', max_length=6)
 	hoehe = models.IntegerField('Hoehe des Schrankes', default=0)
 
 	def __unicode__(self): 
@@ -27,10 +29,10 @@ class Schrank(models.Model):
 
 class Kasten(models.Model):
 	ID = models.IntegerField('ID des Kastens', default=0, primary_key=True)
-	voll = models.BooleanField('Status des Kastens')
+	#voll = models.BooleanField('Status des Kastens')
 	typ = models.ForeignKey(Typ)
 	schrank = models.ForeignKey(Schrank)
 	
 	def __unicode__(self):
-		return u'%s %s %s' % (self.typ, self.schrank, self.voll)
+		return u'%s %s' % (self.typ, self.schrank)
 

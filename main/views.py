@@ -58,8 +58,13 @@ def get_name(request, schranknummer):
 		kaesten.pop()
 		for i in typen:
 			kaesten.append(Kasten.objects.filter(schrank=schranknummer).filter(typ=i))
-
-		form = NameForm(initial={'mate': len(kaesten[0]), 'mateGranat': len(kaesten[1]), 'mateCola': len(kaesten[2])})
+		initial = {'mate' : '0', 'mateCola' : '0', 'mateGranat' : '0', 'bier' : '0', 'sonstiges' : '0', 'leergut' : '0'}
+		for kasten in kaesten:
+			#initial[kasten.typ] = len(kasten)
+			print kasten
+			print '1'
+		form = NameForm(initial)
+#={kaesten[0][0].name: len(kaesten[0]), 'mateGranat': len(kaesten[1]), 'mateCola': len(kaesten[2])})
 
 		template = loader.get_template('main/name.html')
 		context = RequestContext(request, {'form': form, 'schrank': schrank, 'kaesten': kaesten, 'typen': typen, 'schranknummer': schranknummer,})	
