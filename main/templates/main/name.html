@@ -26,13 +26,14 @@
 											<p></p>
 											<div class="input-group">
 												<span class="input-group-btn">
-													<button type="button" class="btn btn-default btn-number" data-type="minus" data-field="{{ kastenart.label }}">
+													<button type="button" class="btn btn-default btn-number" data-type="minus" data-field={{ kastenart.html_name }}>
 														<span class="glyphicon glyphicon-minus"></span>
 													</button>
 												</span>
-												<input type="text" name="{{ kastenart.label }}" class="form-control input-number" value="{{ kastenart.value }}" min="0" max="10">
+												<!--<input type="text" name={{ kastenart.label }} class="form-control input-number" value={{ kastenart.value }} min="0" max="10">-->
+												{{ kastenart }}
 												<span class="input-group-btn">
-													<button type="button" class="btn btn-default btn-number" data-type="plus" data-field="{{ kastenart.label }}">
+													<button type="button" class="btn btn-default btn-number" data-type="plus" data-field={{ kastenart.html_name }}>
 														<span class="glyphicon glyphicon-plus"></span>
 													</button>
 												</span>

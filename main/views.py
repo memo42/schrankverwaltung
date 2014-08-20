@@ -38,10 +38,11 @@ def get_name(request, schranknummer):
 		# create a form instance and populate it with data from the request:
 		form = NameForm(request.POST)
 		# check whether it's valid:
+		print form.errors
 		if form.is_valid():
 			# process the data in form.cleaned_data as required
 			# ...
-			# redirect to a new URL:
+			# respond with a friendly thank you.:
 			return HttpResponse('thanks')
 		else:
 			return HttpResponse('no')
