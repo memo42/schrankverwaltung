@@ -47,5 +47,7 @@ def get_name(request):
     # if a GET (or any other method) we'll create a blank form
     else:
         form = NameForm()
+	template = loader.get_template('main/name.html')
+	context = RequestContext(request, {'form': form},)		
 
-    return render(request, 'main/name.html', {'form': form})
+    	return HttpResponse(template.render(context))
