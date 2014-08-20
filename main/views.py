@@ -46,7 +46,6 @@ def get_name(request, schranknummer):
 
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = NameForm()
 
 	typen = Typ.objects.all()
 	schrank = Kasten.objects.filter(schrank=schranknummer)
@@ -54,6 +53,8 @@ def get_name(request, schranknummer):
 	kaesten.pop()
 	for i in typen:
 		kaesten.append(Kasten.objects.filter(schrank=schranknummer).filter(typ=i))
+
+	form = NameForm(initial={'your_name': schranknummer})
 
 	template = loader.get_template('main/name.html')
 	context = RequestContext(request, {'form': form, 'schrank': schrank, 'kaesten': kaesten, 'typen': typen, 'schranknummer': schranknummer,})	
