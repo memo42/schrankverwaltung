@@ -32,7 +32,7 @@ def schrank(request, schranknummer):
 		#return HttpResponse("%s" % schrank)
 def uebersicht(request):
 	return HttpResponse("Uebersicht")
-def get_name(request):
+def get_name(request, schranknummer):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -47,7 +47,15 @@ def get_name(request):
     # if a GET (or any other method) we'll create a blank form
     else:
         form = NameForm()
+
+	typen = Typ.objects.all()
+	schrank = Kasten.objects.filter(schrank=schranknummer)
+	kaesten = [42]
+	kaesten.pop()
+	for i in typen:
+		kaesten.append(Kasten.objects.filter(schrank=schranknummer).filter(typ=i))
+
 	template = loader.get_template('main/name.html')
-	context = RequestContext(request, {'form': form},)		
+	context = RequestContext(request, {'form': form, 'schrank': schrank, 'kaesten': kaesten, 'typen': typen, 'schranknummer': schranknummer,})	
 
     	return HttpResponse(template.render(context))
