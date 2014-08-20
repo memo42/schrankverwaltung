@@ -40,10 +40,14 @@ def get_name(request, schranknummer):
 		# check whether it's valid:
 		print form.errors
 		if form.is_valid():
+			mate = form.cleaned_data['mate']
+			mategranat = form.cleaned_data['mateGranat']
+			matecola = form.cleaned_data['mateCola']
+			
 			# process the data in form.cleaned_data as required
 			# ...
 			# respond with a friendly thank you.:
-			return HttpResponse('thanks')
+			return HttpResponse(mate + mategranat)
 		else:
 			return HttpResponse('no')
 	# if a GET (or any other method) we'll create a blank form
