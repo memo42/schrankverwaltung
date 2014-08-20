@@ -14,7 +14,7 @@ def schrank(request, schranknummer):
 	if request.method == 'POST':
 		form = NameForm(request.POST)
 		if form.is_valid():
-			return HttpRespons("thanks")
+			return HttpResponse("thanks")
 	else:
 		typen = Typ.objects.all()
 		schrank = Kasten.objects.filter(schrank=schranknummer)
@@ -33,30 +33,30 @@ def schrank(request, schranknummer):
 def uebersicht(request):
 	return HttpResponse("Uebersicht")
 def get_name(request, schranknummer):
-    # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = NameForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponse('thanks')
+	# if this is a POST request we need to process the form data
+	if request.method == 'POST':
+		# create a form instance and populate it with data from the request:
+		form = NameForm(request.POST)
+		# check whether it's valid:
+		if form.is_valid():
+			# process the data in form.cleaned_data as required
+			# ...
+			# redirect to a new URL:
+			return HttpResponse('thanks')
+		else:
+			return HttpResponse('no')
+	# if a GET (or any other method) we'll create a blank form
+	else:
+		typen = Typ.objects.all()
+		schrank = Kasten.objects.filter(schrank=schranknummer)
+		kaesten = [42]
+		kaesten.pop()
+		for i in typen:
+			kaesten.append(Kasten.objects.filter(schrank=schranknummer).filter(typ=i))
 
-    # if a GET (or any other method) we'll create a blank form
-    else:
+		form = NameForm(initial={'mate': len(kaesten[0]), 'mateGranat': len(kaesten[1]), 'mateCola': len(kaesten[2])})
 
-	typen = Typ.objects.all()
-	schrank = Kasten.objects.filter(schrank=schranknummer)
-	kaesten = [42]
-	kaesten.pop()
-	for i in typen:
-		kaesten.append(Kasten.objects.filter(schrank=schranknummer).filter(typ=i))
+		template = loader.get_template('main/name.html')
+		context = RequestContext(request, {'form': form, 'schrank': schrank, 'kaesten': kaesten, 'typen': typen, 'schranknummer': schranknummer,})	
 
-	form = NameForm(initial={'your_name': schranknummer})
-
-	template = loader.get_template('main/name.html')
-	context = RequestContext(request, {'form': form, 'schrank': schrank, 'kaesten': kaesten, 'typen': typen, 'schranknummer': schranknummer,})	
-
-    	return HttpResponse(template.render(context))
+		return HttpResponse(template.render(context))

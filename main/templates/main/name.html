@@ -7,9 +7,53 @@
 	</head>
 	<body>
 		<form action="/main/name/{{ schranknummer }}" method="post">
-	 		{% csrf_token %}
-			{{ form }}
-			<input type="submit" value="Submit" />
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+						<table class="table">
+							<thead><tr>
+								<th>Kategorie</th>
+								<th>Anzahl</th>
+							</tr></thead>
+							<tbody>
+								{% for kastenart in form %}
+								<tr>
+									<td>
+										{{ kastenart.label_tag }} 
+									</td>
+									<td>
+										<div class="center">
+											<p></p>
+											<div class="input-group">
+												<span class="input-group-btn">
+													<button type="button" class="btn btn-default btn-number" data-type="minus" data-field="{{ kastenart.label }}">
+														<span class="glyphicon glyphicon-minus"></span>
+													</button>
+												</span>
+												<input type="text" name="{{ kastenart.label }}" class="form-control input-number" value="{{ kastenart.value }}" min="0" max="10">
+												<span class="input-group-btn">
+													<button type="button" class="btn btn-default btn-number" data-type="plus" data-field="{{ kastenart.label }}">
+														<span class="glyphicon glyphicon-plus"></span>
+													</button>
+												</span>
+											</div>
+											<p></p>
+										</div>
+									</td>
+								</tr>
+								{% endfor %}
+								<tr>
+									<td>
+									<input type="submit" value="Submit" />
+	 								{% csrf_token %}
+									</td>
+									<td></td>
+								</tr>
+      					</tbody>
+               	</table>
+            	</div>
+         	</div>
+      	</div>
 		</form>
       <script src="http://code.jquery.com/jquery.min.js"></script>
       <script src="/static/bootstrap/js/bootstrap.min.js"></script>
