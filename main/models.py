@@ -17,7 +17,7 @@ class Typ(models.Model):
 	hoehe = models.IntegerField('Hoehe des Kastens in Millimeter (mm)')
 
 	def __unicode__(self): 
-		return self.get_name_display()
+		return u'%s' % (self.name)#.get_name_display()
 
 class Schrank(models.Model):
 	nummer = models.CharField('eineindeutige SchrankNummer. Format E306.1', max_length=6, default=0, primary_key=True)

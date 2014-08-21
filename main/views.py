@@ -40,14 +40,17 @@ def get_name(request, schranknummer):
 		# check whether it's valid:
 		print form.errors
 		if form.is_valid():
-			mate = form.cleaned_data['mate']
-			mategranat = form.cleaned_data['mateGranat']
-			matecola = form.cleaned_data['mateCola']
-			
+			MA = form.cleaned_data['MA']
+			MC = form.cleaned_data['MC']
+			MG = form.cleaned_data['MG']
+			BI = form.cleaned_data['BI']
+			SO = form.cleaned_data['SO']
+			LG = form.cleaned_data['LG']			
+
 			# process the data in form.cleaned_data as required
 			# ...
 			# respond with a friendly thank you.:
-			return HttpResponse(mate + mategranat)
+			return HttpResponse(MA+MG)
 		else:
 			return HttpResponse('no')
 	# if a GET (or any other method) we'll create a blank form
@@ -58,13 +61,15 @@ def get_name(request, schranknummer):
 		kaesten.pop()
 		for i in typen:
 			kaesten.append(Kasten.objects.filter(schrank=schranknummer).filter(typ=i))
-		initial = {'mate' : '0', 'mateCola' : '0', 'mateGranat' : '0', 'bier' : '0', 'sonstiges' : '0', 'leergut' : '0'}
+		initial = {'MA' : '0', 'MC' : '0', 'MG' : '0', 'BI' : '0', 'SO' : '0', 'LG' : '0'}
+		
 		for kasten in kaesten:
-			#initial[kasten.typ] = len(kasten)
+			#initial[kasten.values_list('typ', flat=True)] = len(kasten)
+			print kasten.values('typ')
 			print kasten
-			print '1'
+			print len(kasten)
 		form = NameForm(initial)
-#={kaesten[0][0].name: len(kaesten[0]), 'mateGranat': len(kaesten[1]), 'mateCola': len(kaesten[2])})
+		#={kaesten[0][0].name: len(kaesten[0]), 'mateGranat': len(kaesten[1]), 'mateCola': len(kaesten[2])})
 
 		template = loader.get_template('main/name.html')
 		context = RequestContext(request, {'form': form, 'schrank': schrank, 'kaesten': kaesten, 'typen': typen, 'schranknummer': schranknummer,})	
