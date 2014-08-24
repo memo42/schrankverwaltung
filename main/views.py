@@ -64,10 +64,10 @@ def get_name(request, schranknummer):
 		initial = {'MA' : '0', 'MC' : '0', 'MG' : '0', 'BI' : '0', 'SO' : '0', 'LG' : '0'}
 		
 		for kasten in kaesten:
-			#initial[kasten.values_list('typ', flat=True)] = len(kasten)
-			print kasten.values('typ')
-			print kasten
-			print len(kasten)
+			
+			if ( kasten ):
+				print (kasten.values('typ')[0]['typ'])
+				initial[kasten.values('typ')[0]['typ']] = len(kasten)
 		form = NameForm(initial)
 		#={kaesten[0][0].name: len(kaesten[0]), 'mateGranat': len(kaesten[1]), 'mateCola': len(kaesten[2])})
 
