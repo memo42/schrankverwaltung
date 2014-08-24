@@ -43,7 +43,7 @@ def get_name(request, schranknummer):
 	initial = {'MA' : '0', 'MC' : '0', 'MG' : '0', 'BI' : '0', 'SO' : '0', 'LG' : '0'}
 	for kasten in kaesten:
 		if ( kasten ):
-			print (kasten.values('typ')[0]['typ'])
+			#print (kasten.values('typ')[0]['typ'])
 			initial[kasten.values('typ')[0]['typ']] = len(kasten)
 	
 	template = loader.get_template('main/name.html')
@@ -54,6 +54,16 @@ def get_name(request, schranknummer):
 		# check whether it's valid:
 		print form.errors
 		if ( form.is_valid() ):
+			for kasten in kaesten:
+				if kasten:
+					if ( len(kasten) == form.cleaned_data[kasten.values('typ')[0]['typ']]):
+						print "gleich"
+					elif (len(kasten) >= form.cleaned_data[kasten.values('typ')[0]['typ']]): 
+						print "weniger"
+					elif (len(kasten) <= form.cleaned_data[kasten.values('typ')[0]['typ']]):
+						print "mehr"
+			print kaesten[0][0]
+			print "piep"
 			MA = form.cleaned_data['MA']
 			MC = form.cleaned_data['MC']
 			MG = form.cleaned_data['MG']
