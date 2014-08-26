@@ -33,18 +33,20 @@ def schrank(request, schranknummer):
 def uebersicht(request):
 	return HttpResponse("Uebersicht")
 def get_name(request, schranknummer):
-	
+	idcounter = 42;	
 	typen = Typ.objects.all()
 	schrank = Kasten.objects.filter(schrank=schranknummer)
-	kaesten = [42]
-	kaesten.pop()
+	kaesten = {}
+	initial = {}
+	print typen
 	for i in typen:
-		kaesten.append(Kasten.objects.filter(schrank=schranknummer).filter(typ=i))
-	initial = {'MA' : '0', 'MC' : '0', 'MG' : '0', 'BI' : '0', 'SO' : '0', 'LG' : '0'}
-	for kasten in kaesten:
-		if ( kasten ):
-			#print (kasten.values('typ')[0]['typ'])
-			initial[kasten.values('typ')[0]['typ']] = len(kasten)
+		print i
+		kaesten[i] = Kasten.objects.filter(schrank=schranknummer).filter(typ=i)
+		initial[str(i)] = len(kaesten[i])
+		print len(kaesten[i])
+	print kaesten
+	print "initial:"
+	print initial
 	
 	template = loader.get_template('main/name.html')
 	# if this is a POST request we need to process the form data
@@ -54,15 +56,19 @@ def get_name(request, schranknummer):
 		# check whether it's valid:
 		print form.errors
 		if ( form.is_valid() ):
-			for kasten in kaesten:
-				if kasten:
-					if ( len(kasten) == form.cleaned_data[kasten.values('typ')[0]['typ']]):
-						print "gleich"
-					elif (len(kasten) >= form.cleaned_data[kasten.values('typ')[0]['typ']]): 
-						print "weniger"
-					elif (len(kasten) <= form.cleaned_data[kasten.values('typ')[0]['typ']]):
-						print "mehr"
-			print kaesten[0][0]
+			for kasten in typen:
+				print kasten
+				if ( len(kaesten[kasten]) == form.cleaned_data[str(kasten)]):
+					print "gleich"
+				elif (len(kaesten[kasten]) >= form.cleaned_data[str(kasten)]): 
+					print "weniger"
+				elif (len(kaesten[kasten]) <= form.cleaned_data[str(kasten)]):
+					print "mehr"
+					print Schrank.objects.filter(nummer=schranknummer)
+					b = Kasten(ID=idcounter, typ=kasten, schrank=Schrank.objects.filter(nummer=schranknummer)[0])
+					b.save()
+					idcounter = idcounter + 1
+					print idcounter
 			print "piep"
 			MA = form.cleaned_data['MA']
 			MC = form.cleaned_data['MC']
