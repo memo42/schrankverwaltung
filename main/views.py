@@ -33,7 +33,6 @@ def schrank(request, schranknummer):
 def uebersicht(request):
 	return HttpResponse("Uebersicht")
 def get_name(request, schranknummer):
-	idcounter = 42;	
 	typen = Typ.objects.all()
 	schrank = Kasten.objects.filter(schrank=schranknummer)
 	kaesten = {}
@@ -62,24 +61,15 @@ def get_name(request, schranknummer):
 					print "gleich"
 				elif (len(kaesten[kasten]) >= form.cleaned_data[str(kasten)]): 
 					print "weniger"
+					for i in range(0, len(kaesten[kasten]) - form.cleaned_data[str(kasten)]):
+						print kaesten[kasten].first().delete()
 				elif (len(kaesten[kasten]) <= form.cleaned_data[str(kasten)]):
 					print "mehr"
-					print Schrank.objects.filter(nummer=schranknummer)
-					b = Kasten(ID=idcounter, typ=kasten, schrank=Schrank.objects.filter(nummer=schranknummer)[0])
-					b.save()
-					idcounter = idcounter + 1
-					print idcounter
-			print "piep"
-			MA = form.cleaned_data['MA']
-			MC = form.cleaned_data['MC']
-			MG = form.cleaned_data['MG']
-			BI = form.cleaned_data['BI']
-			SO = form.cleaned_data['SO']
-			LG = form.cleaned_data['LG']			
+					for i in range(0,(form.cleaned_data[str(kasten)] - len(kaesten[kasten]))):
+						print Schrank.objects.filter(nummer=schranknummer)
+						b = Kasten(typ=kasten, schrank=Schrank.objects.filter(nummer=schranknummer)[0])
+						b.save()
 			
-			# process the data in form.cleaned_data as required
-			# ...
-			# respond with a friendly thank you.
 			context = RequestContext(request, {'form': form, 'schrank': schrank, 'kaesten': kaesten, 'typen': typen, 'schranknummer': schranknummer,})	
 			return HttpResponse(template.render(context))
 		else:
