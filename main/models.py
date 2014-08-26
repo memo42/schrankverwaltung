@@ -21,7 +21,7 @@ class Typ(models.Model):
 
 class Schrank(models.Model):
 	nummer = models.CharField('eineindeutige SchrankNummer. Format E306.1', max_length=6, default=0, primary_key=True)
-	raum = models.CharField('Raum in dem der  Schrank steht', max_length=6)
+	#raum = models.CharField('Raum in dem der Schrank steht', max_length=6)
 	hoehe = models.IntegerField('Hoehe des Schrankes', default=0)
 
 	def __unicode__(self): 

@@ -66,9 +66,14 @@ def get_name(request, schranknummer):
 				elif (len(kaesten[kasten]) <= form.cleaned_data[str(kasten)]):
 					print "mehr"
 					for i in range(0,(form.cleaned_data[str(kasten)] - len(kaesten[kasten]))):
-						print Schrank.objects.filter(nummer=schranknummer)
-						b = Kasten(typ=kasten, schrank=Schrank.objects.filter(nummer=schranknummer)[0])
-						b.save()
+						if Schrank.objects.filter(nummer=schranknummer):
+							b = Kasten(typ=kasten, schrank=Schrank.objects.filter(nummer=schranknummer)[0])
+							b.save()
+						else:
+							c = Schrank(nummer=schranknummer, hoehe=100)
+							c.save()
+							b = Kasten(typ=kasten, schrank=Schrank.objects.filter(nummer=schranknummer)[0])
+							b.save()
 			
 			context = RequestContext(request, {'form': form, 'schrank': schrank, 'kaesten': kaesten, 'typen': typen, 'schranknummer': schranknummer,})	
 			return HttpResponse(template.render(context))
