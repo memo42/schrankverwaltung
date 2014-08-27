@@ -8,6 +8,56 @@ from main.models import Schrank
 
 from main.forms import NameForm
 
+def init():
+	MA = Typ(name='MA', hoehe=33)
+	MA.save()
+	MC = Typ(name='MC', hoehe=32)
+	MC.save()
+	MG = Typ(name='MG', hoehe=33)
+	MG.save()
+	BI = Typ(name='BI', hoehe=33)
+	BI.save()
+	SO = Typ(name='SO', hoehe=33)
+	SO.save()
+	LG = Typ(name='LG', hoehe=33)
+	LG.save()
+	
+def uebersicht(request):
+	typen = Typ.objects.all()
+	print typen
+	if not typen :
+		init()
+	kaesten = {}
+	initial = {}
+	for i in typen:
+		kaesten[i] = Kasten.objects.filter(typ=i)
+		initial[str(i)] = len(kaesten[i])
+	
+	template = loader.get_template('main/uebersicht.html')
+	form = NameForm(initial)
+	context = RequestContext(request, {'form': form, 'kaesten': kaesten, 'typen': typen,})	
+	return HttpResponse(template.render(context))
+
+def raum_uebersicht(request, raumnummer):
+	typen = Typ.objects.all()
+	schraenke = Schrank.objects.filter(raum=raumnummer)
+	kaesten = {}
+	initial = {}
+	for i in typen:
+		kaesten[i] = []
+		for j in schraenke:
+			temp = Kasten.objects.filter(typ=i).filter(schrank=j)
+			for k in temp:
+				kaesten[i].append(k)
+			print kaesten[i]
+		print "-----------------------------"
+		initial[str(i)] = len(kaesten[i])
+	
+	template = loader.get_template('main/uebersicht.html')
+	form = NameForm(initial)
+	context = RequestContext(request, {'form': form, 'kaesten': kaesten, 'typen': typen,})	
+	return HttpResponse(template.render(context))
+
 def schrank(request, schranknummer):
 	typen = Typ.objects.all()
 	schrank = Kasten.objects.filter(schrank=schranknummer)
@@ -17,7 +67,7 @@ def schrank(request, schranknummer):
 		kaesten[i] = Kasten.objects.filter(schrank=schranknummer).filter(typ=i)
 		initial[str(i)] = len(kaesten[i])
 	
-	template = loader.get_template('main/name.html')
+	template = loader.get_template('main/schrank.html')
 	# if this is a POST request we need to process the form data
 	if request.method == 'POST':
 		# create a form instance and populate it with data from the request:
