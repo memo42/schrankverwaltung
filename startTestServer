@@ -1,1 +1,10 @@
+function killscreen {
+  hasScreen=$( screen -ls | grep "$1" )
+  if [ "$hasScreen" != "" ]; then
+    pid=$(echo $hasScreen | grep -o -E "[0-9]*.$1")
+    pid=$(echo $pid | grep -o -E '[0-9]*')
+    kill $pid
+  fi
+}
+killscreen django
 screen -mdS django python manage.py runserver 0.0.0.0:8000
