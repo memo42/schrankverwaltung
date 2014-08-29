@@ -1,0 +1,14 @@
+on a linux system with screen installed simply execute the starttestserver script
+
+then go to localhost:8000/main
+
+there are some locker populated in the database (E304, E306)
+To visit the overview of the lockers in a room go to localhost:8000/main/Roomnumber
+e.g. localhost:8000/main/E304
+
+To visit the page of a specific locker go to localhost:8000/main/roomnumber.lockernumber where lockernumber is between 1 and the number of lockerdoors in that room.
+e.g. localhost:8000/main/E304.1
+
+To get a admin view over the database go to
+localhost:8000/admin - user: mo - password: k]K#1Z0Qx[0G
+
