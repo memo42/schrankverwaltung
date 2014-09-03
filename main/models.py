@@ -17,7 +17,7 @@ class Typ(models.Model):
 	hoehe = models.IntegerField('Hoehe des Kastens in Millimeter (mm)')
 
 	def __unicode__(self): 
-		return u'%s' % (self.name)#.get_name_display()
+		return u'%s' % (self.name)
 
 class Schrank(models.Model):
 	nummer = models.CharField('eineindeutige SchrankNummer. Format E306.1', max_length=6, default=0, primary_key=True)
@@ -28,8 +28,6 @@ class Schrank(models.Model):
 		return u'%s' % (self.nummer)
 
 class Kasten(models.Model):
-#	ID = models.IntegerField('ID des Kastens', default=0, primary_key=True)
-	#voll = models.BooleanField('Status des Kastens')
 	typ = models.ForeignKey(Typ)
 	schrank = models.ForeignKey(Schrank)
 	
