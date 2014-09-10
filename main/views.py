@@ -72,16 +72,20 @@ def schrank(request, schranknummer):
 	if request.method == 'POST':
 		# creates a form instance and populates it with data from the request
 		form = NameForm(request.POST)
+		success = ''
+
 		# checks whether it's valid
-		print form.errors
+		#print form.errors
 		if ( form.is_valid() ):
 			for kasten in typen:
 				# in case the number of crates of type kasten was reduced
-				if (len(kaesten[kasten]) >= form.cleaned_data[str(kasten)]): 
+				if (len(kaesten[kasten]) > form.cleaned_data[str(kasten)]): 
+					success = 'Saved'
 					for i in range(0, len(kaesten[kasten]) - form.cleaned_data[str(kasten)]):
 						kaesten[kasten].first().delete()
 				# in case the number of crates of type kasten was increased
-				elif (len(kaesten[kasten]) <= form.cleaned_data[str(kasten)]):
+				elif (len(kaesten[kasten]) < form.cleaned_data[str(kasten)]):
+					success = 'Saved'
 					for i in range(0,(form.cleaned_data[str(kasten)] - len(kaesten[kasten]))):
 						# if there is no matching "schrank" object a new one is created
 						if not Schrank.objects.filter(nummer=schranknummer):
@@ -90,7 +94,7 @@ def schrank(request, schranknummer):
 						b = Kasten(typ=kasten, schrank=Schrank.objects.filter(nummer=schranknummer)[0])
 						b.save()
 			
-			context = RequestContext(request, {'form': form, 'schranknummer': schranknummer})	
+			context = RequestContext(request, {'form': form, 'schranknummer': schranknummer, 'success': success})	
 			return HttpResponse(template.render(context))
 		# if the returned form data is not valid
 		else:
