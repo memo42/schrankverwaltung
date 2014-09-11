@@ -16,7 +16,6 @@
 								<th>Anzahl</th>
 							</tr></thead>
 							<tbody>
-								<p>{{ success }}</p>
 								{% for kastenart in form %}
 								<tr>
 									<td>
@@ -45,8 +44,13 @@
 								{% endfor %}
 								<tr>
 									<td>
-									<input type="submit" value="Submit" />
-	 								{% csrf_token %}
+										<input type="submit" value="Submit" />
+									</td>
+									<td>
+										<span style="color:#3ADF00">
+											<b><p style="text-align:right">{{ success }}</p></b>
+										</span>
+										{% csrf_token %}
 									</td>
 									<td></td>
 								</tr>
