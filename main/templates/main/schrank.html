@@ -6,7 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css">
 	</head>
 	<body>
-		<form action="/main/{{ schranknummer }}/" method="post">
+		<form action="/schrankverwaltung/main/{{ schranknummer }}/" method="post">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-4">
@@ -55,8 +55,9 @@
          	</div>
       	</div>
 		</form>
+		{% load staticfiles %}
       <script src="http://code.jquery.com/jquery.min.js"></script>
-      <script src="/static/bootstrap/js/bootstrap.min.js"></script>
-      <script src="/static/bootstrap/js/plusButton.js"></script>
+      <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+      <script src="{% static "bootstrap/js/plusButton.js" %}"></script>
 	</body>
 </html>
