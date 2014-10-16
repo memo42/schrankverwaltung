@@ -14,7 +14,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 from ConfigParser import RawConfigParser
 
 config = RawConfigParser()
-config.read('schrankverwaltung/settings.ini')
+config.read('/usr/local/share/schrank/schrankverwaltung/settings.ini')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
