@@ -14,7 +14,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 from ConfigParser import RawConfigParser
 
 config = RawConfigParser()
-config.read('/usr/local/share/schrank/schrankverwaltung/settings.ini')
+config.read('/home/vagrant/schrankverwaltung/schrankverwaltung/settings.ini')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -23,12 +23,11 @@ config.read('/usr/local/share/schrank/schrankverwaltung/settings.ini')
 SECRET_KEY = config.get('secrets','SECRET_KEY') 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = ['www.miemo.de',
-						'www.miemo.de.',]
+ALLOWED_HOSTS = ['*',]
 
 
 # Application definition
