@@ -1,18 +1,8 @@
 from django.db import models
 
 class Typ(models.Model):
-	NAME_CHOICES = (
-		('MA', 'Mate'),
-		('MC', 'Mate-Cola'),
-		('MG', 'Mate-Granat'),
-		('BI', 'Bier'),
-		('SO', 'Sonstiges'),
-		('LG', 'Leergut'),
-	)
 	name = models.CharField('Inhalt des Kastens', 
-									max_length=2,
-									choices=NAME_CHOICES,
-									default='SO',
+									max_length=20,
 									primary_key=True)
 	hoehe = models.IntegerField('Hoehe des Kastens in Millimeter (mm)')
 
