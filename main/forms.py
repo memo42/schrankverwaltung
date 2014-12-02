@@ -8,14 +8,14 @@ maxAnzahl = 20
 class NameForm(forms.Form):
 	typen = Typ.objects.all()
 	
-	for i in typen:
-		print i.name
+	#for i in typen:
+	#	print i.name
 		#i.name = forms.IntegerField(label=i.name, widget=forms.TextInput(attrs={'name': i.name, 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl }))
 	MA = forms.IntegerField(label='Mate', widget=forms.TextInput(attrs={'name': 'Mate', 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl }))
 	MG = forms.IntegerField(label='Mate-Granat', widget=forms.TextInput(attrs={'name': 'Mate-Granat', 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl  }))
 	MC = forms.IntegerField(label='Mate-Cola', widget=forms.TextInput(attrs={'name': 'Mate-Cola', 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl  }))
 	BI = forms.IntegerField(label='Bier', widget=forms.TextInput(attrs={'name': 'Bier', 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl  }))
-	SO = forms.IntegerField(label='Sonstiges', widget=forms.TextInput(attrs={'name': 'Sonstiges', 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl  }))
+	Sonstiges = forms.IntegerField(label='Sonstiges', widget=forms.TextInput(attrs={'name': 'Sonstiges', 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl  }))
 	LG = forms.IntegerField(label='Leergut', widget=forms.TextInput(attrs={'name': 'Leergut', 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl  }))
 
 	def clean_MA(self):
@@ -39,8 +39,8 @@ class NameForm(forms.Form):
 			raise forms.ValidationError("Mate out of bounds exception")
 		return BI
 	def clean_SO(self):
-		SO = self.cleaned_data['SO']
-		if SO > maxAnzahl:
+		Sonstiges = self.cleaned_data['Sonstiges']
+		if Sonstiges > maxAnzahl:
 			raise forms.ValidationError("Mate out of bounds exception")
 		return SO
 	def clean_LG(self):

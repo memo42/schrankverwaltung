@@ -17,8 +17,8 @@ def init():
 	MG.save()
 	BI = Typ(name='BI', hoehe=33)
 	BI.save()
-	SO = Typ(name='SO', hoehe=33)
-	SO.save()
+	Sonstiges = Typ(name='Sonstiges', hoehe=33)
+	Sonstiges.save()
 	LG = Typ(name='LG', hoehe=33)
 	LG.save()
 
