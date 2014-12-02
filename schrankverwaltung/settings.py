@@ -24,11 +24,11 @@ config.read('/usr/local/share/schrank/schrankverwaltung/settings.ini')
 SECRET_KEY = config.get('secrets','SECRET_KEY') 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = False
-DEBUG = True
+DEBUG = False
+#DEBUG = True
 
-#TEMPLATE_DEBUG = False
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
+#TEMPLATE_DEBUG = True
 
 #ALLOWED_HOSTS = ['*',]
 ALLOWED_HOSTS = ['www.miemo.de', 
