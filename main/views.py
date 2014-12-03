@@ -69,7 +69,6 @@ def schrank(request, schranknummer):
 		for i in typen:
 			kaesten[i] = Kasten.objects.filter(schrank=schranknummer).filter(typ=i)
 			initial[str(i)] = len(kaesten[i])
-		
 		template = loader.get_template('main/schrank.html')
 		# if this is a POST request the form data is processed here
 		if request.method == 'POST':
@@ -93,8 +92,8 @@ def schrank(request, schranknummer):
 							b = Kasten(typ=kasten, schrank=Schrank.objects.filter(nummer=schranknummer)[0])
 							b.save()
 				
-					context = RequestContext(request, {'form': form, 'schranknummer': schranknummer, 'success': success})	
-					return HttpResponse(template.render(context))
+				context = RequestContext(request, {'form': form, 'schranknummer': schranknummer, 'success': success})	
+				return HttpResponse(template.render(context))
 			# if the returned form data is not valid
 			else:
 				return HttpResponse('Error: you somehow managed to enter invalid data')
