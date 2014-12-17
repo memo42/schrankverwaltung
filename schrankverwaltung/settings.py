@@ -21,7 +21,8 @@ config.read('/usr/local/share/schrank/schrankverwaltung/settings.ini')
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config.get('secrets','SECRET_KEY') 
+SECRET_KEY = config.get('secrets','SECRET_KEY')
+#SECRET_KEY = '/?}DN1U7m%o4#TRD6By/C-yFh)czS7dfP|>u%1kVDB`cHJ4;1#>.oJc9AoiG/n;q6/%q)<*_9kS$O1O{]$$u!E3zPWAmdqIh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -42,7 +43,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles', 
+    'django.contrib.staticfiles',
     'main',
 )
 
