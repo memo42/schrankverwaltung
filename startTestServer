@@ -1,3 +1,5 @@
+#! /bin/bash
+
 function killscreen {
   hasScreen=$( screen -ls | grep "$1" )
   if [ "$hasScreen" != "" ]; then
