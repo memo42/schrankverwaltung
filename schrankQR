@@ -1,0 +1,36 @@
+#! /bin/sh
+
+content=$(echo "www.miemo.de/schrankverwaltung/main/E")
+
+for raum in 201 302 303 304 306; do
+	for i in 1 2 3; do
+		code=$(echo "${content}${raum}.${i}")
+		echo "$code"
+		qrencode --output="Schrank-E${raum}-${i}.png" "$code"
+	done
+done
+
+for i in 4 5 6; do
+	code=$(echo "${content}201.${i}")
+	echo "$code"
+	qrencode --output="Schrank-E201-${i}.png" "$code"
+done
+
+qrencode --output="Schrank-fs-1.png" "www.miemo.de/schrankverwaltung/main/fs.1"
+
+rm *.aux
+rm *.log
+rm *.tex
+rm *.pdf
+for i in *; do
+	name=$(echo "$i" | grep -oE "^[^.]*")
+	text=$(echo "$name" | grep -oE "[Efs0-9-]*" | grep -oE "[^-].*")
+	echo "$name"
+	echo "$text"
+	echo "\\\documentclass[a4paper,extrafontsizes,60pt]{memoir}\n\\\usepackage{a4wide}\n\\\usepackage{graphicx}\n\\\begin{document}\n\\\pagestyle{empty}\n\\\centering\n\\\textbf{\\\huge{$text}}\n\\\vspace{90pt}\n\\\centering\n\\\includegraphics[width=\\\textwidth]{${i}}\n\\\end{document}" > "$name".tex
+	pdflatex "$name".tex
+	rm *.aux
+	rm *.log
+done
+
+pdftk *.pdf cat output alle.pdf
