@@ -10,7 +10,7 @@
 			<div class="row">
 				<div class="col-md-4">
 					<table class="table">
-					  <thead>
+						<thead>
 							<tr>
 								<th>Kategorie</th>
 								<th>Anzahl</th>
@@ -20,28 +20,28 @@
 							{% for typ in typen %}
 							<tr>
 								<td>
-									{{ typ }}								
+									{{ typ }}
 								</td>
 								<td>
-									
+
 								<div class="center">
-	 							<p>
+								<p>
 									</p><div class="input-group">
-			 							<span class="input-group-btn">
-				  							<button type="button" class="btn btn-default btn-number" data-type="minus" data-field="{{ typ }}">
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-default btn-number" data-type="minus" data-field="{{ typ }}">
 												<span class="glyphicon glyphicon-minus"></span>
-				  							</button>
-			 							</span>
+											</button>
+										</span>
 										{% for kasten in kaesten %}
 											{% if kasten.0.typ = typ%}
-			 									<input type="text" name="{{ typ }}" class="form-control input-number" value="{{ kasten|length }}" min="0" max="10">
+												<input type="text" name="{{ typ }}" class="form-control input-number" value="{{ kasten|length }}" min="0" max="10">
 											{% endif %}
 										{% endfor %}
 										<span class="input-group-btn">
-				  							<button type="button" class="btn btn-default btn-number" data-type="plus" data-field="{{ typ }}">
+											<button type="button" class="btn btn-default btn-number" data-type="plus" data-field="{{ typ }}">
 												<span class="glyphicon glyphicon-plus"></span>
-				  							</button>
-			 							</span>
+											</button>
+										</span>
 									</div>
 									<p></p>
 								</div>
