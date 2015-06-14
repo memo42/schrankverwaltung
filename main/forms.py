@@ -4,7 +4,7 @@ from main.models import Typ
 from main.models import Kasten
 from main.models import Schrank
 
-maxAnzahl = 20
+maxAnzahl = 100
 class NameForm(forms.Form):
 	typen = Typ.objects.all()
 	mylabel = {}
@@ -21,7 +21,7 @@ class NameForm(forms.Form):
 	MA = forms.IntegerField(label=mylabel['Mate'], widget=forms.TextInput(attrs={'name': 'MA', 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl }))
 	MG = forms.IntegerField(label=mylabel['Mate-Granat'], widget=forms.TextInput(attrs={'name': 'MG', 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl  }))
 	MC = forms.IntegerField(label=mylabel['Mate-Cola'], widget=forms.TextInput(attrs={'name': 'MC', 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl  }))
-	ME = forms.IntegerField(label=mylabel['Mate-Eistee'], widget=forms.TextInput(attrs={'name': 'ME', 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl  }))	
+	ME = forms.IntegerField(label=mylabel['Mate-Eistee'], widget=forms.TextInput(attrs={'name': 'ME', 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl  }))
 	BI = forms.IntegerField(label=mylabel['Bier'], widget=forms.TextInput(attrs={'name': 'BI', 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl  }))
 	Sonstiges = forms.IntegerField(label=mylabel['Sonstiges'], widget=forms.TextInput(attrs={'name': 'Sonstiges', 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl  }))
 	LG = forms.IntegerField(label=mylabel['Leergut'], widget=forms.TextInput(attrs={'name': 'LG', 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl  }))

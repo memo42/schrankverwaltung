@@ -34,10 +34,10 @@ def uebersicht(request):
 	for i in typen:
 		kaesten[i] = Kasten.objects.filter(typ=i)
 		initial[str(i)] = len(kaesten[i])
-	
+
 	template = loader.get_template('main/uebersicht.html')
 	form = NameForm(initial)
-	context = RequestContext(request, {'form': form,})	
+	context = RequestContext(request, {'form': form,})
 	return HttpResponse(template.render(context))
 
 # Reads the total number of crates in each category per room from the database and passes it to the uebersicht template.
@@ -53,16 +53,16 @@ def raum_uebersicht(request, raumnummer):
 			for k in temp:
 				kaesten[i].append(k)
 		initial[str(i)] = len(kaesten[i])
-	
+
 	template = loader.get_template('main/uebersicht.html')
 	form = NameForm(initial)
-	context = RequestContext(request, {'form': form, 'raumnummer': raumnummer,})	
+	context = RequestContext(request, {'form': form, 'raumnummer': raumnummer,})
 	return HttpResponse(template.render(context))
 
 # Reads the number of crates in one part of the cupboard, displays them and lets the user change them.
 def schrank(request, schranknummer):
 
-	# if there is no matching "schrank" object throw error 
+	# if there is no matching "schrank" object throw error
 	if Schrank.objects.filter(nummer=schranknummer):
 		typen = Typ.objects.all()
 		schrank = Kasten.objects.filter(schrank=schranknummer)
@@ -77,13 +77,13 @@ def schrank(request, schranknummer):
 			# creates a form instance and populates it with data from the request
 			form = NameForm(request.POST)
 			success = ''
-	
+
 			# checks whether it's valid
 			#print form.errors
 			if ( form.is_valid() ):
 				for kasten in typen:
 					# in case the number of crates of type kasten was reduced
-					if (len(kaesten[kasten]) > form.cleaned_data[str(kasten)]): 
+					if (len(kaesten[kasten]) > form.cleaned_data[str(kasten)]):
 						success = 'Saved'
 						for i in range(0, len(kaesten[kasten]) - form.cleaned_data[str(kasten)]):
 							kaesten[kasten].first().delete()
@@ -93,8 +93,8 @@ def schrank(request, schranknummer):
 						for i in range(0,(form.cleaned_data[str(kasten)] - len(kaesten[kasten]))):
 							b = Kasten(typ=kasten, schrank=Schrank.objects.filter(nummer=schranknummer)[0])
 							b.save()
-				
-				context = RequestContext(request, {'form': form, 'schranknummer': schranknummer, 'success': success})	
+
+				context = RequestContext(request, {'form': form, 'schranknummer': schranknummer, 'success': success})
 				return HttpResponse(template.render(context))
 			# if the returned form data is not valid
 			else:
@@ -102,8 +102,8 @@ def schrank(request, schranknummer):
 		# if it is a GET request a blank form is created
 		else:
 			form = NameForm(initial)
-			context = RequestContext(request, {'form': form, 'schranknummer': schranknummer,})	
+			context = RequestContext(request, {'form': form, 'schranknummer': schranknummer,})
 			return HttpResponse(template.render(context))
-	
+
 	else:
 		return HttpResponse('Error: not a valid cupboard')
