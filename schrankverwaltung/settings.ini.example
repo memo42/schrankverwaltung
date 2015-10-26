@@ -1,6 +1,0 @@
-[secrets]
-SECRET_KEY: '/?}DN1U7m%o4#TRD6By/C-yFh)czS7dfP|>u%1kVDB`cHJ4;1#>.oJc9AoiG/n;q6/%q)<*_9kS$O1O{]$$u!E3zPWAmdqIh'
-[debug]
-DEBUG: True
-TEMPLATE_DEBUG: True
-ALLOWED_HOSTS: ['*',]

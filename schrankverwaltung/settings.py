@@ -10,14 +10,14 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from ConfigParser import SafeConfigParser
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-from ConfigParser import RawConfigParser
 
-config = RawConfigParser()
+config = SafeConfigParser()
 
-settings_dir = os.path.dirname(__file__)
-PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
-SETTINGS_PATH = os.path.join(PROJECT_ROOT, 'schrankverwaltung/settings.ini')
+#PROJECT_ROOT = os.path.abspath(BASE_DIR)
+SETTINGS_PATH = os.path.join(BASE_DIR, 'schrankverwaltung/settings.cfg')
 config.read(SETTINGS_PATH)
 
 # Quick-start development settings - unsuitable for production
@@ -25,14 +25,19 @@ config.read(SETTINGS_PATH)
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config.get('secrets','SECRET_KEY')
+#SECRET_KEY = 'uaenuagNAESENA{=}(=>_(})-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config.get('debug','DEBUG')
+#DEBUG = 'false'
+DEBUG = config.getboolean('debugging','DEBUG')
 
-TEMPLATE_DEBUG = config.get('debug','TEMPLATE_DEBUG')
+TEMPLATE_DEBUG = config.getboolean('debugging','TEMPLATE_DEBUG')
 
-ALLOWED_HOSTS = config.get('debug','ALLOWED_HOSTS')
+#TEMPLATE_DEBUG = False
 
+ALLOWED_HOSTS = config.get('debugging','ALLOWED_HOSTS')
+#ALLOWED_HOSTS = ['*',]
+#ALLOWED_HOSTS = ['www.miemo.de','www.miemo.de.',]
 
 # Application definition
 
