@@ -14,26 +14,25 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 from ConfigParser import RawConfigParser
 
 config = RawConfigParser()
-#config.read('/home/vagrant/schrankverwaltung/schrankverwaltung/settings.ini')
-config.read('/usr/local/share/schrank/schrankverwaltung/settings.ini')
+
+settings_dir = os.path.dirname(__file__)
+PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
+SETTINGS_PATH = os.path.join(PROJECT_ROOT, 'schrankverwaltung/settings.ini')
+config.read(SETTINGS_PATH)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config.get('secrets','SECRET_KEY')
-#SECRET_KEY = '/?}DN1U7m%o4#TRD6By/C-yFh)czS7dfP|>u%1kVDB`cHJ4;1#>.oJc9AoiG/n;q6/%q)<*_9kS$O1O{]$$u!E3zPWAmdqIh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-#DEBUG = True
+DEBUG = config.get('debug','DEBUG')
 
-TEMPLATE_DEBUG = False
-#TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = config.get('debug','TEMPLATE_DEBUG')
 
-#ALLOWED_HOSTS = ['*',]
-ALLOWED_HOSTS = ['www.miemo.de', 
-						'www.miemo.de.',]   
+ALLOWED_HOSTS = config.get('debug','ALLOWED_HOSTS')
+
 
 # Application definition
 
@@ -89,4 +88,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
-#STATIC_ROOT = '/usr/local/share/schrank/main/static/'
