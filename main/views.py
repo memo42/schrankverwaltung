@@ -8,6 +8,8 @@ from main.models import Schrank
 
 from main.forms import NameForm
 
+import re
+
 def init():
 	MA = Typ(name='MA', hoehe=33)
 	MA.save()
@@ -68,6 +70,17 @@ def schrank(request, schranknummer):
 		schrank = Kasten.objects.filter(schrank=schranknummer)
 		kaesten = {}
 		initial = {}
+
+		m = re.search('(?<=[A-Z][0-9]{3}.)[0-9]', schranknummer)
+		single_digit_number = m.group(0)
+		m = re.search('(?=.[0-9])[A-Z][0-9]{3}', schranknummer)
+		room = m.group(0)
+
+		in_room = Schrank.objects.filter(raum = room)
+
+		next_cupboard = ((int(single_digit_number)) % len(in_room)) + 1
+		previous_cupboard = ((int(single_digit_number) - 2) % len(in_room)) + 1
+
 		for i in typen:
 			kaesten[i] = Kasten.objects.filter(schrank=schranknummer).filter(typ=i)
 			initial[str(i)] = len(kaesten[i])
@@ -94,7 +107,7 @@ def schrank(request, schranknummer):
 							b = Kasten(typ=kasten, schrank=Schrank.objects.filter(nummer=schranknummer)[0])
 							b.save()
 
-				context = RequestContext(request, {'form': form, 'schranknummer': schranknummer, 'success': success})
+				context = RequestContext(request, {'form': form, 'schranknummer': schranknummer, 'success': success, 'room': room, 'next_cupboard': next_cupboard, 'previous_cupboard': previous_cupboard})
 				return HttpResponse(template.render(context))
 			# if the returned form data is not valid
 			else:
@@ -102,7 +115,7 @@ def schrank(request, schranknummer):
 		# if it is a GET request a blank form is created
 		else:
 			form = NameForm(initial)
-			context = RequestContext(request, {'form': form, 'schranknummer': schranknummer,})
+			context = RequestContext(request, {'form': form, 'schranknummer': schranknummer, 'room':room, 'next_cupboard': next_cupboard, 'previous_cupboard': previous_cupboard,})
 			return HttpResponse(template.render(context))
 
 	else:

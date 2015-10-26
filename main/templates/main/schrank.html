@@ -12,14 +12,28 @@
 					<div class="col-md-4">
 						<table class="table">
 							<thead><tr>
-								<th>Kategorie</th>
-								<th>Anzahl</th>
+					        	<th>
+                                    <input type="submit" class="btn btn-default" value="Submit" />
+                                </th>
+
+                                <th>
+                                    <div align="right">
+                                        <a href="../{{room}}.{{ previous_cupboard }}/" class="btn btn-default" role="button">
+                                            previous
+                                        </a>
+                                        <a href="../{{room}}.{{ next_cupboard }}/" class="btn btn-default" role="button">
+                                            next
+                                        </a>
+                                    </div>
+                                </th>
 							</tr></thead>
 							<tbody>
+								<th>Kategorie</th>
+								<th>Anzahl</th>
 								{% for kastenart in form %}
 								<tr>
 									<td>
-										{{ kastenart.label_tag }} 
+										{{ kastenart.label_tag }}
 									</td>
 									<td>
 										<div class="center">
@@ -44,12 +58,22 @@
 								{% endfor %}
 								<tr>
 									<td>
-										<input type="submit" value="Submit" />
+							            <input type="submit" class="btn btn-default" value="Submit" />
 									</td>
 									<td>
+                                        <div>
+                                        <div align="right">
+                                          <a href="../{{room}}.{{ previous_cupboard }}/" class="btn btn-default" role="button">
+                                              previous
+                                          </a>
+                                          <a href="../{{room}}.{{ next_cupboard }}/" class="btn btn-default" role="button">
+                                              next
+                                          </a>
+                                        </div>
 										<span style="color:#3ADF00">
 											<b><p style="text-align:right">{{ success }}</p></b>
 										</span>
+                                        </div>
 										{% csrf_token %}
 									</td>
 									<td></td>
