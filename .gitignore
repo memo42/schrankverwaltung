@@ -2,5 +2,5 @@
 *.swp
 *.zip
 db.sqlite3
-schrankverwaltung/settings.ini
+schrankverwaltung/settings.cfg
 main/static
