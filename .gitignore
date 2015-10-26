@@ -1,4 +1,6 @@
 *.pyc
 *.swp
+*.zip
 db.sqlite3
 schrankverwaltung/settings.ini
+main/static
