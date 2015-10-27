@@ -1,8 +1,6 @@
 from django.shortcuts import render
-from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from django.template import RequestContext, loader
-from django.core.context_processors import csrf
 
 from main.models import Typ
 from main.models import Kasten
@@ -89,9 +87,6 @@ def schrank(request, schranknummer):
 		template = loader.get_template('main/schrank.html')
 		# if this is a POST request the form data is processed here
 		if request.method == 'POST':
-			# cross site request forgery protection
-			csrf = {}
-			csrf.update(csrf(request))
 			# creates a form instance and populates it with data from the request
 			form = NameForm(request.POST)
 			success = ''
@@ -112,7 +107,7 @@ def schrank(request, schranknummer):
 							b = Kasten(typ=kasten, schrank=Schrank.objects.filter(nummer=schranknummer)[0])
 							b.save()
 
-				context = RequestContext(request, {'form': form, 'schranknummer': schranknummer, 'success': success, 'room': room, 'next_cupboard': next_cupboard, 'previous_cupboard': previous_cupboard, 'csrf': csrf})
+				context = RequestContext(request, {'form': form, 'schranknummer': schranknummer, 'success': success, 'room': room, 'next_cupboard': next_cupboard, 'previous_cupboard': previous_cupboard,})
 				return HttpResponse(template.render(context))
 			# if the returned form data is not valid
 			else:
