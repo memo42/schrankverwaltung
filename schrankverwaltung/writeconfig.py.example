@@ -1,0 +1,14 @@
+import ConfigParser
+
+config = ConfigParser.RawConfigParser()
+
+config.add_section('secrets')
+config.set('secrets', 'SECRET_KEY', 'enemeneminemo')
+config.add_section('debugging')
+config.set('debugging', 'DEBUG', 'false')
+config.set('debugging', 'TEMPLATE_DEBUG', 'false')
+config.set('debugging', 'ALLOWED_HOSTS', "['example.de','www.example.de']")
+
+# Writing our configuration file to 'example.cfg'
+with open('settings.cfg', 'wb') as configfile:
+    config.write(configfile)

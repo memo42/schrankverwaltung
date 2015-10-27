@@ -1,6 +1,7 @@
 *.pyc
 *.swp
 *.zip
+writeconfig.py
 db.sqlite3
 schrankverwaltung/settings.cfg
 main/static
