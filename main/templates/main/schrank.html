@@ -12,20 +12,20 @@
 					<div class="col-md-4">
 						<table class="table">
 							<thead><tr>
-					        	<th style="float:left">
-                                    <input type="submit" class="btn btn-default" role="button" value="Submit" />
-                                </th>
-                                <th>
-                                    <h4 style="float:left">{{schranknummer}}</h4>
-                                    <div align="right">
-                                        <a href="../{{room}}.{{ previous_cupboard }}/" class="btn btn-default" role="button">
-                                            previous
-                                        </a>
-                                        <a href="../{{room}}.{{ next_cupboard }}/" class="btn btn-default" role="button">
-                                            next
-                                        </a>
-                                    </div>
-                                </th>
+							<th style="float:left">
+								<input type="submit" class="btn btn-default" role="button" value="Submit" />
+							</th>
+							<th>
+								<h4 style="float:left">{{schranknummer}}</h4>
+								<div align="right">
+									<a href="../{{room}}.{{ previous_cupboard }}/" class="btn btn-default" role="button">
+										previous
+									</a>
+									<a href="../{{room}}.{{ next_cupboard }}/" class="btn btn-default" role="button">
+										next
+									</a>
+								</div>
+							</th>
 							</tr></thead>
 							<tbody>
 								<th>Kategorie</th>
@@ -41,7 +41,7 @@
 											<div class="input-group">
 												<span class="input-group-btn">
 													<button type="button" class="btn btn-default btn-number" data-type="minus" data-field={{ kastenart.html_name }}>
-														<span class="glyphicon glyphicon-minus"></span>
+															<span class="glyphicon glyphicon-minus"></span>
 													</button>
 												</span>
 												{{ kastenart }}
@@ -57,34 +57,33 @@
 								</tr>
 								{% endfor %}
 								<tr>
-					        	<th style="float:left">
-                                    <input type="submit" class="btn btn-default" role="button" value="Submit" />
-                                </th>
-                                    <th>
-                                        <h4 style="float:left">{{schranknummer}}</h4>
-                                        <div align="right">
-                                            <a href="../{{room}}.{{ previous_cupboard }}/" class="btn btn-default" role="button">
-                                                previous
-                                            </a>
-                                            <a href="../{{room}}.{{ next_cupboard }}/" class="btn btn-default" role="button">
-                                                next
-                                            </a>
-                                        </div>
-								    		<span style="color:#3ADF00">
-								    			<b><p style="text-align:right">{{ success }}</p></b>
-								    		</span>
-                                            </div>
-								    		{% csrf_token %}
-                                    </th>
+									<th style="float:left">
+										<input type="submit" class="btn btn-default" role="button" value="Submit" />
+									</th>
+									<th>
+										<h4 style="float:left">{{schranknummer}}</h4>
+										<div align="right">
+											<a href="../{{room}}.{{ previous_cupboard }}/" class="btn btn-default" role="button">	
+												previous
+											</a>
+											<a href="../{{room}}.{{ next_cupboard }}/" class="btn btn-default" role="button">
+												next
+											</a>
+										</div>
+										<span style="color:#3ADF00">
+											<b><p style="text-align:right">{{ success }}</p></b>
+										</span>
+									</th>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
+			{% csrf_token %}
 		</form>
 		{% load staticfiles %}
-		<script src="http://code.jquery.com/jquery.min.js"></script>
+		<script src="{% static "jquery/jquery.min.js" %}"></script>
 		<script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
 		<script src="{% static "bootstrap/js/plusButton.js" %}"></script>
 	</body>
