@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import RequestContext, loader
+from django.http import HttpResponseRedirect
 
 from main.models import Typ
 from main.models import Kasten
@@ -90,9 +91,8 @@ def schrank(request, schranknummer):
 			# creates a form instance and populates it with data from the request
 			form = NameForm(request.POST)
 			success = ''
-
 			# checks whether it's valid
-			#print form.errors
+			# print form.errors
 			if ( form.is_valid() ):
 				for kasten in typen:
 					# in case the number of crates of type kasten was reduced
@@ -103,19 +103,28 @@ def schrank(request, schranknummer):
 					# in case the number of crates of type kasten was increased
 					elif (len(kaesten[kasten]) < form.cleaned_data[str(kasten)]):
 						success = 'Saved'
-						for i in range(0,(form.cleaned_data[str(kasten)] - len(kaesten[kasten]))):
+						for i in range(0, (form.cleaned_data[str(kasten)] - len(kaesten[kasten]))):
 							b = Kasten(typ=kasten, schrank=Schrank.objects.filter(nummer=schranknummer)[0])
 							b.save()
-
 				context = RequestContext(request, {'form': form, 'schranknummer': schranknummer, 'success': success, 'room': room, 'next_cupboard': next_cupboard, 'previous_cupboard': previous_cupboard,})
-				return HttpResponse(template.render(context))
+
+				if 'previous' in request.POST:
+					template.render(context)
+					#return HttpResponse(template.render(context))
+					return HttpResponseRedirect("../" + str(room) + "." + str(previous_cupboard))
+				elif 'next' in request.POST:
+					template.render(context)
+					return HttpResponseRedirect("../" + str(room) + "." + str(next_cupboard))
+				else:
+					return HttpResponse(template.render(context))
 			# if the returned form data is not valid
 			else:
 				return HttpResponse('Error: you somehow managed to enter invalid data')
+
 		# if it is a GET request a blank form is created
 		else:
 			form = NameForm(initial)
-			context = RequestContext(request, {'form': form, 'schranknummer': schranknummer, 'room':room, 'next_cupboard': next_cupboard, 'previous_cupboard': previous_cupboard,})
+			context = RequestContext(request, {'form': form, 'schranknummer': schranknummer, 'room': room, 'next_cupboard': next_cupboard, 'previous_cupboard': previous_cupboard,})
 			return HttpResponse(template.render(context))
 
 	else:
