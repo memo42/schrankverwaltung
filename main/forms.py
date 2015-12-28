@@ -6,7 +6,6 @@ from main.models import Schrank
 
 maxAnzahl = 100
 class NameForm(forms.Form):
-	typen = Typ.objects.all()
 	mylabel = {}
 	mylabel['Mate'] = 'Mate'
 	mylabel['Mate-Granat'] = 'Mate-Granat'
@@ -15,9 +14,7 @@ class NameForm(forms.Form):
 	mylabel['Bier'] = 'Bier'
 	mylabel['Sonstiges'] = 'Sonstiges'
 	mylabel['Leergut'] = 'Leergut'
-	#for i in typen:
-	#	print i.name
-		#i.name = forms.IntegerField(label=i.name, widget=forms.TextInput(attrs={'name': i.name, 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl }))
+
 	MA = forms.IntegerField(label=mylabel['Mate'], widget=forms.TextInput(attrs={'name': 'MA', 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl }))
 	MG = forms.IntegerField(label=mylabel['Mate-Granat'], widget=forms.TextInput(attrs={'name': 'MG', 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl  }))
 	MC = forms.IntegerField(label=mylabel['Mate-Cola'], widget=forms.TextInput(attrs={'name': 'MC', 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl  }))
@@ -61,3 +58,19 @@ class NameForm(forms.Form):
 		if LG > maxAnzahl:
 			raise forms.ValidationError("Mate out of bounds exception")
 		return LG
+
+class TypeForm(forms.Form):
+	mylabel = {}
+	mylabel['E201'] = 'E201'
+	mylabel['E302'] = 'E302'
+	mylabel['E303'] = 'E303'
+	mylabel['E304'] = 'E304'
+	mylabel['E306'] = 'E306'
+	mylabel['fs'] = 'fs'
+
+	E201 = forms.IntegerField(label=mylabel['E201'], widget=forms.TextInput(attrs={'name': 'E201', 'class': "form-control input-number"}))
+	E302 = forms.IntegerField(label=mylabel['E302'], widget=forms.TextInput(attrs={'name': 'E302', 'class': "form-control input-number"}))
+	E303 = forms.IntegerField(label=mylabel['E303'], widget=forms.TextInput(attrs={'name': 'E303', 'class': "form-control input-number"}))
+	E304 = forms.IntegerField(label=mylabel['E304'], widget=forms.TextInput(attrs={'name': 'E304', 'class': "form-control input-number"}))
+	E306 = forms.IntegerField(label=mylabel['E306'], widget=forms.TextInput(attrs={'name': 'E306', 'class': "form-control input-number"}))
+	fs = forms.IntegerField(label=mylabel['fs'], widget=forms.TextInput(attrs={'name': 'fs', 'class': "form-control input-number"}))

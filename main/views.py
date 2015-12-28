@@ -8,6 +8,7 @@ from main.models import Kasten
 from main.models import Schrank
 
 from main.forms import NameForm
+from main.forms import TypeForm
 
 import re
 
@@ -42,6 +43,37 @@ def uebersicht(request):
 	form = NameForm(initial)
 	context = RequestContext(request, {'form': form,})
 	return HttpResponse(template.render(context))
+
+def uebersicht_nach_sorte(request, sorte):
+	typen = Typ.objects.all()
+	schraenke = Schrank.objects.all()
+	kaesten = Kasten.objects.all()
+	raeume = []
+	in_room = []
+	counter = {}
+	for j in schraenke:
+		if j.raum not in raeume:
+			raeume.append(j.raum)
+			#print j.raum
+	for k in schraenke:
+		in_room.append(Kasten.objects.filter(schrank = k).filter(typ = sorte))
+	#	print in_room
+	for i in raeume:
+		for j in in_room:
+			if len(j) > 0 and j[0].schrank.raum == i:
+	#			print str(len(j)) + str(j)
+				if i in counter:
+					counter[i] = counter[i] + len(j)
+				else:
+					counter.update({i:len(j)})
+				#print i + " - " + str(counter[i])
+	print counter
+
+	template = loader.get_template('main/uebersicht_nach_sorte.html')
+	form = TypeForm(counter)
+	context = RequestContext(request, {'form': form, 'sorte': sorte,})
+	return HttpResponse(template.render(context))
+	#return HttpResponse(raeume)
 
 # Reads the total number of crates in each category per room from the database and passes it to the uebersicht template.
 def raum_uebersicht(request, raumnummer):
