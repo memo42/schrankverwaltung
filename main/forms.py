@@ -66,11 +66,11 @@ class TypeForm(forms.Form):
 	mylabel['E303'] = 'E303'
 	mylabel['E304'] = 'E304'
 	mylabel['E306'] = 'E306'
-	mylabel['fs'] = 'fs'
+	mylabel['E013'] = 'E013'
 
 	E201 = forms.IntegerField(label=mylabel['E201'], widget=forms.TextInput(attrs={'name': 'E201', 'class': "form-control input-number"}))
 	E302 = forms.IntegerField(label=mylabel['E302'], widget=forms.TextInput(attrs={'name': 'E302', 'class': "form-control input-number"}))
 	E303 = forms.IntegerField(label=mylabel['E303'], widget=forms.TextInput(attrs={'name': 'E303', 'class': "form-control input-number"}))
 	E304 = forms.IntegerField(label=mylabel['E304'], widget=forms.TextInput(attrs={'name': 'E304', 'class': "form-control input-number"}))
 	E306 = forms.IntegerField(label=mylabel['E306'], widget=forms.TextInput(attrs={'name': 'E306', 'class': "form-control input-number"}))
-	fs = forms.IntegerField(label=mylabel['fs'], widget=forms.TextInput(attrs={'name': 'fs', 'class': "form-control input-number"}))
+	E013 = forms.IntegerField(label=mylabel['E013'], widget=forms.TextInput(attrs={'name': 'E013', 'class': "form-control input-number"}))
