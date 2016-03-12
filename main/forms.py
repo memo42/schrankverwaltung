@@ -20,7 +20,7 @@ class NameForm(forms.Form):
 	MC = forms.IntegerField(label=mylabel['Mate-Cola'], widget=forms.TextInput(attrs={'name': 'MC', 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl  }))
 	ME = forms.IntegerField(label=mylabel['Mate-Eistee'], widget=forms.TextInput(attrs={'name': 'ME', 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl  }))
 	BI = forms.IntegerField(label=mylabel['Bier'], widget=forms.TextInput(attrs={'name': 'BI', 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl  }))
-	Sonstiges = forms.IntegerField(label=mylabel['Sonstiges'], widget=forms.TextInput(attrs={'name': 'Sonstiges', 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl  }))
+	SO = forms.IntegerField(label=mylabel['Sonstiges'], widget=forms.TextInput(attrs={'name': 'SO', 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl  }))
 	LG = forms.IntegerField(label=mylabel['Leergut'], widget=forms.TextInput(attrs={'name': 'LG', 'class': "form-control input-number", 'min': '0', 'max': maxAnzahl  }))
 
 	def clean_MA(self):
@@ -49,10 +49,10 @@ class NameForm(forms.Form):
 			raise forms.ValidationError("Mate out of bounds exception")
 		return BI
 	def clean_SO(self):
-		Sonstiges = self.cleaned_data['Sonstiges']
-		if Sonstiges > maxAnzahl:
+		SO = self.cleaned_data['SO']
+		if SO > maxAnzahl:
 			raise forms.ValidationError("Mate out of bounds exception")
-		return Sonstiges
+		return SO
 	def clean_LG(self):
 		LG = self.cleaned_data['LG']
 		if LG > maxAnzahl:
