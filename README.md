@@ -31,11 +31,3 @@ e.g. localhost:8000/main/E304.1
 To get a admin view over the database go to
 localhost:8000/admin
 The user and password are the ones specified when initializing the database.
-
-# ToDo
-* add logging functionality
-* improve +/- Buttons
-* set value to maximum if user tried to set it to a higher than allowed value
-* include a table showing how many crates of which beverage are in each cupboard
-* remove saved indicator as soon as a new change is made
-* implement automatically linking cupboards and the rooms they are in
