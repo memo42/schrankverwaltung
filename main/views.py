@@ -13,20 +13,65 @@ from main.forms import TypeForm
 import re
 
 def init():
-	MA = Typ(name='MA', hoehe=33)
+	MA = Typ(name='MA', longname='Mate', hoehe=33)
 	MA.save()
-	MC = Typ(name='MC', hoehe=32)
+	MC = Typ(name='MC', longname='Mate-Cola', hoehe=32)
 	MC.save()
-	MG = Typ(name='MG', hoehe=33)
+	MG = Typ(name='MG', longname='Mate-Granat', hoehe=33)
 	MG.save()
-	ME = Typ(name='ME', hoehe=33)
+	ME = Typ(name='ME', longname='Mate-Eistee', hoehe=33)
 	ME.save()
-	BI = Typ(name='BI', hoehe=33)
+	BI = Typ(name='BI', longname='Bier', hoehe=33)
 	BI.save()
-	SO = Typ(name='SO', hoehe=33)
+	SO = Typ(name='SO', longname='Sonstiges', hoehe=33)
 	SO.save()
-	LG = Typ(name='LG', hoehe=33)
+	LG = Typ(name='LG', longname='Leergut', hoehe=33)
 	LG.save()
+	# E306
+	E3061 = Schrank(nummer='E306.1', raum='E306', hoehe='150')
+	E3061.save()
+	E3062 = Schrank(nummer='E306.2', raum='E306', hoehe='150')
+	E3062.save()
+	E3063 = Schrank(nummer='E306.3', raum='E306', hoehe='150')
+	E3063.save()
+	# E304
+	E3041 = Schrank(nummer='E304.1', raum='E304', hoehe='150')
+	E3041.save()
+	E3042 = Schrank(nummer='E304.2', raum='E304', hoehe='150')
+	E3042.save()
+	E3043 = Schrank(nummer='E304.3', raum='E304', hoehe='150')
+	E3043.save()
+	# E303
+	E3031 = Schrank(nummer='E303.1', raum='E303', hoehe='150')
+	E3031.save()
+	E3032 = Schrank(nummer='E303.2', raum='E303', hoehe='150')
+	E3032.save()
+	E3033 = Schrank(nummer='E303.3', raum='E303', hoehe='150')
+	E3033.save()
+	# E302
+	E3021 = Schrank(nummer='E302.1', raum='E302', hoehe='150')
+	E3021.save()
+	E3022 = Schrank(nummer='E302.2', raum='E302', hoehe='150')
+	E3022.save()
+	E3023 = Schrank(nummer='E302.3', raum='E302', hoehe='150')
+	E3023.save()
+	# E201
+	E2011 = Schrank(nummer='E201.1', raum='E201', hoehe='150')
+	E2011.save()
+	E2012 = Schrank(nummer='E201.2', raum='E201', hoehe='150')
+	E2012.save()
+	E2013 = Schrank(nummer='E201.3', raum='E201', hoehe='150')
+	E2013.save()
+	E2014 = Schrank(nummer='E201.4', raum='E201', hoehe='150')
+	E2014.save()
+	E2015 = Schrank(nummer='E201.5', raum='E201', hoehe='150')
+	E2015.save()
+	E2016 = Schrank(nummer='E201.6', raum='E201', hoehe='150')
+	E2016.save()
+	# E013
+	E0131 = Schrank(nummer='E013.1', raum='E013', hoehe='1000')
+	E0131.save()
+
 
 # Reads the total number of crates in each category from the database and passes the count to the uebersicht template.
 def uebersicht(request):
