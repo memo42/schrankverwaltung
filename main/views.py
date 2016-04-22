@@ -161,7 +161,7 @@ def schrank(request, schranknummer):
 
 		for i in typen:
 			kaesten[i] = Kasten.objects.filter(schrank=schranknummer).filter(typ=i)
-			initial[str(i)] = len(kaesten[i])
+			initial[i.name] = len(kaesten[i])
 		template = loader.get_template('main/schrank.html')
 		# if this is a POST request the form data is processed here
 		if request.method == 'POST':
